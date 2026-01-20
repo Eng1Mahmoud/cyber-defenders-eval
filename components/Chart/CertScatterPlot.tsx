@@ -85,22 +85,18 @@ export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotPr
                 <ScatterChart
                     margin={{ top: 20, right: 20, bottom: 40, left: 50 }}
                 >
-                    {/* Top Left: Challengers */}
                     <ReferenceArea x1={0} x2={0.5} y1={2.5} y2={5} fill="transparent" strokeOpacity={0}>
                         <Label content={<QuadrantLabel text="Challengers" />} />
                     </ReferenceArea>
 
-                    {/* Top Right: Leaders */}
                     <ReferenceArea x1={0.5} x2={1} y1={2.5} y2={5} fill="#1e293b" fillOpacity={0.4} strokeOpacity={0}>
                         <Label content={<QuadrantLabel text="Leaders" />} />
                     </ReferenceArea>
 
-                    {/* Bottom Left: Niche Players */}
                     <ReferenceArea x1={0} x2={0.5} y1={0} y2={2.5} fill="#1e293b" fillOpacity={0.4} strokeOpacity={0}>
                         <Label content={<QuadrantLabel text="Niche Players" />} />
                     </ReferenceArea>
 
-                    {/* Bottom Right: Visionaries */}
                     <ReferenceArea x1={0.5} x2={1} y1={0} y2={2.5} fill="transparent" strokeOpacity={0}>
                         <Label content={<QuadrantLabel text="Visionaries" />} />
                     </ReferenceArea>
@@ -148,14 +144,7 @@ export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotPr
                 </ScatterChart>
             </ResponsiveContainer>
 
-            {/* 
-        Custom Axis Labels with Arrows 
-        - Increased font size (text-xs)
-        - Increased Arrow Length (width="80")
-        - Positioned strictly at start of axes
-      */}
-
-            {/* X-Axis Label: Info Icon -> Label -> Arrow */}
+            {/* X-Axis Label */}
             <div className="absolute bottom-4 left-[110px] flex items-center gap-2 pointer-events-none z-10 translate-y-1/2">
                 <span className="text-xs text-white font-bold uppercase tracking-wider">Market Presence</span>
                 <Info className="w-4 h-4 text-white" />
@@ -164,11 +153,7 @@ export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotPr
                 </svg>
             </div>
 
-            {/* Y-Axis Label: Label -> Arrow -> (Info Icon was removed by user, keeping it clean or adding back if implied by 'same style') 
-          User removed Info icon in last edit. I will restore strict symmetry if "same arrow icon" implies full component symmetry, 
-          but usually X and Y differ slightly. I will stick to the ARROW consistency requested. 
-          Dimensions: Width 120 for consistency.
-      */}
+            {/* Y-Axis Label */}
             <div className="absolute bottom-[70px] left-[50px] -rotate-90 origin-bottom-left flex items-center gap-2 pointer-events-none z-10">
                 <span className="text-xs text-white font-bold uppercase tracking-wider">Satisfaction</span>
                 <Info className="w-4 h-4 text-white" />

@@ -19,7 +19,6 @@ export default function FilterBar({
     return (
         <div className="flex flex-col md:flex-row gap-6 mb-6 items-start md:items-center justify-start">
 
-            {/* Type Filter - Joined Button Group Style */}
             <div className="flex bg-transparent">
                 {[
                     { val: "blue", label: "Blue Team" },
@@ -50,7 +49,6 @@ export default function FilterBar({
                 })}
             </div>
 
-            {/* Skill Filter - Clean Dark Dropdown */}
             <div className="w-full md:w-auto ">
                 <Select value={selectedSkill} onValueChange={(v) => setSelectedSkill(v as SkillLevel | "all")}>
                     <SelectTrigger className="w-full md:w-[200px] bg-transparent border-slate-700 text-slate-300 hover:border-slate-500 h-10 rounded-sm font-medium px-4">

@@ -34,7 +34,6 @@ export default function Dashboard() {
     return (
         <div className="container mx-auto p-4 md:p-8 max-w-[1600px]">
             <div className="mb-6 flex flex-col md:flex-row justify-between items-end gap-4">
-                {/* Clean header, just spacing */}
             </div>
 
             <div className="flex flex-col gap-6">
@@ -52,7 +51,6 @@ export default function Dashboard() {
                         data={filteredData}
                         onNodeClick={setSelectedCert}
                     />
-                    {/* Full Screen Toggle */}
                     <div className="absolute top-4 right-4 z-10">
                         <Button
                             variant="ghost"
