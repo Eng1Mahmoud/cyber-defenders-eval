@@ -38,3 +38,15 @@ export interface Certification {
     };
     valid_for: string | null;
 }
+
+export interface FilterBarProps {
+    selectedType: CertType | "all";
+    setSelectedType: (val: CertType | "all") => void;
+    selectedSkill: SkillLevel | "all";
+    setSelectedSkill: (val: SkillLevel | "all") => void;
+}
+
+export interface CertScatterPlotProps {
+    data: Certification[];
+    onNodeClick: (cert: Certification) => void;
+}

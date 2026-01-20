@@ -7,15 +7,8 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { CertType, SkillLevel } from "@/types";
+import { CertType, SkillLevel, FilterBarProps } from "@/types";
 import { cn } from "@/lib/utils";
-
-interface FilterBarProps {
-    selectedType: CertType | "all";
-    setSelectedType: (val: CertType | "all") => void;
-    selectedSkill: SkillLevel | "all";
-    setSelectedSkill: (val: SkillLevel | "all") => void;
-}
 
 export default function FilterBar({
     selectedType,

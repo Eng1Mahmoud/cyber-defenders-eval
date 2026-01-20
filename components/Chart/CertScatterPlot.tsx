@@ -11,13 +11,8 @@ import {
     ReferenceArea,
     Label,
 } from "recharts";
-import { Certification, CertType } from "@/types";
+import { Certification, CertType, CertScatterPlotProps } from "@/types";
 import { Info } from "lucide-react";
-
-interface CertScatterPlotProps {
-    data: Certification[];
-    onNodeClick: (cert: Certification) => void;
-}
 
 const COLOR_MAP: Record<CertType, string> = {
     blue: "#3b82f6",
