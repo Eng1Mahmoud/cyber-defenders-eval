@@ -145,8 +145,8 @@ export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotPr
                 <div className="absolute bottom-4 left-8 sm:left-16 md:left-[80px] lg:left-[110px] flex items-center gap-1.5 sm:gap-2 pointer-events-none z-10 translate-y-1/2">
                     <span className="text-[10px] sm:text-xs text-gray-900 dark:text-white font-bold uppercase tracking-wider">Market Presence</span>
                     <Info className="w-3 h-3 sm:w-4 sm:h-4 text-gray-900 dark:text-white" />
-                    <svg width="80" className="sm:w-[100px] md:w-[120px]" height="6" viewBox="0 0 120 6" fill="none">
-                        <path d="M0 3H116M116 3L113 0.5M116 3L113 5.5" className="stroke-gray-900 dark:stroke-white" strokeWidth="1.5" />
+                    <svg width="80" className="sm:w-[100px] md:w-[120px]" height="12" viewBox="0 0 130 12" fill="none">
+                        <path d="M 0 6 l 120 0 M 120 6 l -5 -5 M 120 6 l -5 5" className="stroke-gray-900 dark:stroke-white" strokeWidth="1" fill="none" />
                     </svg>
                 </div>
 
@@ -154,8 +154,8 @@ export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotPr
                 <div className="absolute bottom-[50px] sm:bottom-[60px] md:bottom-[70px] left-4 sm:left-8 md:left-[50px] -rotate-90 origin-bottom-left flex items-center gap-1.5 sm:gap-2 pointer-events-none z-10">
                     <span className="text-[10px] sm:text-xs text-gray-900 dark:text-white font-bold uppercase tracking-wider">Satisfaction</span>
                     <Info className="w-3 h-3 sm:w-4 sm:h-4 text-gray-900 dark:text-white" />
-                    <svg width="80" className="sm:w-[100px] md:w-[120px]" height="6" viewBox="0 0 120 6" fill="none">
-                        <path d="M0 3H116M116 3L113 0.5M116 3L113 5.5" className="stroke-gray-900 dark:stroke-white" strokeWidth="1.5" />
+                    <svg width="80" className="sm:w-[100px] md:w-[120px]" height="12" viewBox="0 0 130 12" fill="none">
+                        <path d="M 0 6 l 120 0 M 120 6 l -5 -5 M 120 6 l -5 5" className="stroke-gray-900 dark:stroke-white" strokeWidth="1" fill="none" />
                     </svg>
                 </div>
             </div>
