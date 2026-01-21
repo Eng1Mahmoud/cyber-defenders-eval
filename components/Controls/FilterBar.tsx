@@ -80,7 +80,7 @@ export default function FilterBar({
                 })}
             </div>
 
-            <div className="w-full md:w-auto flex flex-col md:flex-row gap-4 items-center">
+            <div className="w-full md:w-auto flex flex-col md:flex-row gap-4 items-center justify-center md:justify-start">
 
                 <Select value={selectedSkill} onValueChange={(v) => setSelectedSkill(v as SkillLevel | "all")}>
                     <SelectTrigger
