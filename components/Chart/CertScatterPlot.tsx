@@ -103,15 +103,15 @@ export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotPr
                             <Label content={<QuadrantLabel text="Challengers" />} />
                         </ReferenceArea>
 
-                        <ReferenceArea x1={0.5} x2={1} y1={2.5} y2={5} fill={referenceAreaFill} fillOpacity={0.4} strokeOpacity={0}>
+                        <ReferenceArea x1={0.5} x2={1} y1={2.5} y2={5} fill={referenceAreaFill} fillOpacity={0.4} stroke="#64748b" strokeOpacity={0.3} strokeDasharray="2 2">
                             <Label content={<QuadrantLabel text="Leaders" hasBackground />} />
                         </ReferenceArea>
 
-                        <ReferenceArea x1={0} x2={0.5} y1={0} y2={2.5} fill={referenceAreaFill} fillOpacity={0.4} strokeOpacity={0}>
+                        <ReferenceArea x1={0} x2={0.5} y1={0} y2={2.5} fill={referenceAreaFill} fillOpacity={0.4} stroke="#64748b" strokeOpacity={0.3} strokeDasharray="2 2">
                             <Label content={<QuadrantLabel text="Niche Players" hasBackground />} />
                         </ReferenceArea>
 
-                        <ReferenceArea x1={0.5} x2={1} y1={0} y2={2.5} fill="transparent" strokeOpacity={0}>
+                        <ReferenceArea x1={0.5} x2={1} y1={0} y2={2.5} fill="transparent" strokeOpacity={0} >
                             <Label content={<QuadrantLabel text="Visionaries" />} />
                         </ReferenceArea>
 
@@ -156,6 +156,17 @@ export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotPr
                             onClick={(props) => onNodeClick(props.payload)}
                             shape={<ChartNode />}
                         />
+                        {/* Dummy scatter to keep chart/reference areas rendered when data is empty */}
+                        {filteredData.length === 0 && (
+                            <Scatter
+                                data={[{ market_presence: 0.5, satisfaction: 2.5 }]}
+                                fill="none"
+                                shape={() => <g />}
+                                legendType="none"
+                                tooltipType="none"
+                                pointerEvents="none"
+                            />
+                        )}
                     </ScatterChart>
                 </ResponsiveContainer>
 
@@ -163,7 +174,7 @@ export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotPr
                 <div className="absolute bottom-4 left-8 sm:left-16 md:left-[80px] lg:left-[110px] flex items-center gap-1.5 sm:gap-2 pointer-events-none z-10 translate-y-1/2">
                     <span className="text-[10px] sm:text-xs text-gray-900 dark:text-white font-bold uppercase tracking-wider">Market Presence</span>
                     <Info className="w-3 h-3 sm:w-4 sm:h-4 text-gray-900 dark:text-white" />
-                    <svg width="80" className="sm:w-[100px] md:w-[120px]" height="12" viewBox="0 0 130 12" fill="none">
+                    <svg width="80" className="sm:w-[150px] md:w-[180px]" height="12" viewBox="0 0 130 12" fill="none">
                         <path d="M 0 6 l 120 0 M 120 6 l -5 -5 M 120 6 l -5 5" className="stroke-gray-900 dark:stroke-white" strokeWidth="1" fill="none" />
                     </svg>
                 </div>
@@ -172,7 +183,7 @@ export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotPr
                 <div className="absolute bottom-[50px] sm:bottom-[60px] md:bottom-[70px] left-4 sm:left-8 md:left-[50px] -rotate-90 origin-bottom-left flex items-center gap-1.5 sm:gap-2 pointer-events-none z-10">
                     <span className="text-[10px] sm:text-xs text-gray-900 dark:text-white font-bold uppercase tracking-wider">Satisfaction</span>
                     <Info className="w-3 h-3 sm:w-4 sm:h-4 text-gray-900 dark:text-white" />
-                    <svg width="80" className="sm:w-[100px] md:w-[120px]" height="12" viewBox="0 0 130 12" fill="none">
+                    <svg width="80" className="sm:w-[150px] md:w-[180px]" height="12" viewBox="0 0 130 12" fill="none">
                         <path d="M 0 6 l 120 0 M 120 6 l -5 -5 M 120 6 l -5 5" className="stroke-gray-900 dark:stroke-white" strokeWidth="1" fill="none" />
                     </svg>
                 </div>

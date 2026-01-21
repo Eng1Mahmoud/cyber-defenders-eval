@@ -69,4 +69,4 @@ function generateMockCert(id: number): Certification {
     };
 }
 
-export const MOCK_DATA: Certification[] = Array.from({ length: 30 }, (_, i) => generateMockCert(i));
+export const MOCK_DATA: Certification[] = Array.from({ length: 50 }, (_, i) => generateMockCert(i));
