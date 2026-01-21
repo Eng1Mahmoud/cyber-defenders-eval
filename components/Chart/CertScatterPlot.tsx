@@ -10,91 +10,17 @@ import {
     ReferenceArea,
     Label,
 } from "recharts";
-import { Certification, CertType, CertScatterPlotProps } from "@/types";
+import { CertType, CertScatterPlotProps } from "@/types";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Info } from "lucide-react";
+import { QuadrantLabel } from "./QuadrantLabel";
+import { ChartTooltip } from "./ChartTooltip";
+import { ChartNode } from "./ChartNode";
 
 const COLOR_MAP: Record<CertType, string> = {
     blue: "#3b82f6",
     red: "#ef4444",
     infoSec: "#94a3b8",
-};
-
-// Quadrant Label Component
-const QuadrantLabel = (props: any) => {
-    const { viewBox, text } = props;
-    const { x, y, width, height } = viewBox;
-    const isMobile = useIsMobile();
-
-    // Responsive configuration
-    const rectWidth = isMobile ? 100 : 140;
-    const rectHeight = isMobile ? 24 : 30;
-    const fontSize = isMobile ? "9px" : "11px";
-    const yMargin = isMobile ? 5 : 10;
-
-    const isBottom = text === "Visionaries" || text === "Niche Players";
-    const yPos = isBottom ? y + height - yMargin : y + yMargin;
-
-    // Calculate Rect Y based on position and height
-    // Bottom: Text is at bottom, so Rect goes up from yPos
-    // Top: Text is at top, so Rect goes down from yPos (minus small padding)
-    const rectY = isBottom
-        ? yPos - rectHeight + (isMobile ? 2 : 4)
-        : yPos - (isMobile ? 2 : 4);
-
-    return (
-        <g>
-            <rect
-                x={x + width / 2 - rectWidth / 2}
-                y={rectY}
-                width={rectWidth}
-                height={rectHeight}
-                rx={4}
-                fill="#1e293b"
-                className="opacity-90"
-            />
-            <text
-                x={x + width / 2}
-                y={yPos}
-                fill="#94a3b8"
-                textAnchor="middle"
-                dominantBaseline={isBottom ? "auto" : "hanging"}
-                className="font-bold uppercase tracking-widest pointer-events-none select-none"
-                style={{ fontWeight: 600, fontSize: fontSize }}
-            >
-                {text}
-            </text>
-        </g>
-    );
-};
-
-const CustomTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
-        const data = payload[0].payload as Certification;
-        return (
-            <div className="bg-[#0f172a] border border-slate-700 p-3 rounded-lg shadow-xl text-slate-100 text-sm z-50">
-                <p className="font-bold mb-1 text-slate-100">{data.abbreviation}</p>
-                <p className="text-xs text-slate-400 mb-2">{data.title}</p>
-                <div className="flex gap-2 text-xs text-slate-300">
-                    <span>Market: {data.market_presence}</span>
-                    <span>Sat: {data.satisfaction}</span>
-                </div>
-            </div>
-        );
-    }
-    return null;
-};
-
-const CustomNode = (props: any) => {
-    const { cx, cy, fill, payload, onClick } = props;
-    return (
-        <g onClick={() => onClick && onClick(props)}>
-            <circle cx={cx} cy={cy} r={6} fill={fill} stroke="#f8fafc" strokeWidth={1} className="cursor-pointer hover:opacity-80 transition-opacity" />
-            <text x={cx} y={cy + 15} textAnchor="middle" fill="#94a3b8" fontSize={10} className="pointer-events-none select-none font-medium">
-                {payload.abbreviation}
-            </text>
-        </g>
-    );
 };
 
 export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotProps) {
@@ -145,28 +71,28 @@ export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotPr
                         width={isMobile ? 30 : 60}
                     />
 
-                    <Tooltip content={<CustomTooltip />} cursor={{ strokeDasharray: "3 3", stroke: "#94a3b8" }} />
+                    <Tooltip content={<ChartTooltip />} cursor={{ strokeDasharray: "3 3", stroke: "#94a3b8" }} />
 
                     <Scatter
                         name="Blue Team"
                         data={blueCerts}
                         fill={COLOR_MAP.blue}
                         onClick={(props) => onNodeClick(props.payload)}
-                        shape={<CustomNode />}
+                        shape={<ChartNode />}
                     />
                     <Scatter
                         name="Red Team"
                         data={redCerts}
                         fill={COLOR_MAP.red}
                         onClick={(props) => onNodeClick(props.payload)}
-                        shape={<CustomNode />}
+                        shape={<ChartNode />}
                     />
                     <Scatter
                         name="InfoSec"
                         data={infoSecCerts}
                         fill={COLOR_MAP.infoSec}
                         onClick={(props) => onNodeClick(props.payload)}
-                        shape={<CustomNode />}
+                        shape={<ChartNode />}
                     />
                 </ScatterChart>
             </ResponsiveContainer>

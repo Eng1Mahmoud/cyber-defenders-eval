@@ -20,16 +20,20 @@ import { Button } from "@/components/ui/button";
 export default function Dashboard() {
     const [selectedType, setSelectedType] = useState<CertType | "all">("blue");
     const [selectedSkill, setSelectedSkill] = useState<SkillLevel | "all">("all");
+    const [searchQuery, setSearchQuery] = useState("");
     const [selectedCert, setSelectedCert] = useState<Certification | null>(null);
 
     const filteredData = useMemo(() => {
         return MOCK_DATA.filter((cert) => {
             const matchType = selectedType === "all" || cert.cert_type === selectedType;
             const matchSkill = selectedSkill === "all" || cert.skill_level === selectedSkill;
+            const matchSearch = searchQuery === "" ||
+                cert.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                cert.abbreviation.toLowerCase().includes(searchQuery.toLowerCase());
 
-            return matchType && matchSkill;
+            return matchType && matchSkill && matchSearch;
         });
-    }, [selectedType, selectedSkill]);
+    }, [selectedType, selectedSkill, searchQuery]);
 
     return (
         <div className="container mx-auto px-2 py-4 sm:p-4 md:p-8 max-w-[1600px]">
@@ -43,6 +47,8 @@ export default function Dashboard() {
                         setSelectedType={setSelectedType}
                         selectedSkill={selectedSkill}
                         setSelectedSkill={setSelectedSkill}
+                        searchQuery={searchQuery}
+                        setSearchQuery={setSearchQuery}
                     />
                 </div>
 

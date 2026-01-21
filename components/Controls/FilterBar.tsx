@@ -15,6 +15,8 @@ export default function FilterBar({
     setSelectedType,
     selectedSkill,
     setSelectedSkill,
+    searchQuery,
+    setSearchQuery,
 }: FilterBarProps) {
     return (
         <div className="flex flex-col md:flex-row gap-6 mb-6 items-center justify-center md:justify-start">
@@ -49,7 +51,8 @@ export default function FilterBar({
                 })}
             </div>
 
-            <div className="w-full md:w-auto flex justify-center md:justify-start">
+            <div className="w-full md:w-auto flex flex-col md:flex-row gap-4 items-center">
+
                 <Select value={selectedSkill} onValueChange={(v) => setSelectedSkill(v as SkillLevel | "all")}>
                     <SelectTrigger className="w-[200px] bg-[#0B1324] border-[#1E293B] text-[#CFD7E2] hover:border-slate-500 h-10 rounded-sm font-medium px-4">
                         <SelectValue placeholder="Select Skill Level" />
@@ -63,6 +66,13 @@ export default function FilterBar({
                         <SelectItem value="Expert">Expert</SelectItem>
                     </SelectContent>
                 </Select>
+                <input
+                    type="text"
+                    placeholder="Search certifications..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-[200px] h-10 px-3 py-2 bg-[#0B1324] border border-[#1E293B] rounded-sm text-sm text-[#CFD7E2] placeholder:text-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                />
             </div>
         </div>
     );

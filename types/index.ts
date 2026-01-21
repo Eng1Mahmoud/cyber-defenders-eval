@@ -44,9 +44,30 @@ export interface FilterBarProps {
     setSelectedType: (val: CertType | "all") => void;
     selectedSkill: SkillLevel | "all";
     setSelectedSkill: (val: SkillLevel | "all") => void;
+    searchQuery: string;
+    setSearchQuery: (val: string) => void;
 }
+
 
 export interface CertScatterPlotProps {
     data: Certification[];
     onNodeClick: (cert: Certification) => void;
+}
+
+export interface QuadrantLabelProps {
+    viewBox?: { x: number; y: number; width: number; height: number };
+    text: string;
+}
+
+export interface ChartTooltipProps {
+    active?: boolean;
+    payload?: { payload: Certification }[];
+}
+
+export interface ChartNodeProps {
+    cx?: number;
+    cy?: number;
+    fill?: string;
+    payload?: Certification;
+    onClick?: (payload: any) => void;
 }
