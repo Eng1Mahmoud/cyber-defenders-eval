@@ -19,9 +19,13 @@ export default function FilterBar({
     setSearchQuery,
 }: FilterBarProps) {
     return (
-        <div className="flex flex-col md:flex-row gap-6 mb-6 items-center justify-center md:justify-start">
+        <div
+            className="flex flex-col md:flex-row gap-6 mb-6 items-center justify-center md:justify-start"
+            role="search"
+            aria-label="Filter certifications"
+        >
 
-            <div className="flex bg-transparent">
+            <div className="flex bg-transparent" role="group" aria-label="Filter by team type">
                 {[
                     { val: "blue", label: "Blue Team" },
                     { val: "red", label: "Red Team" },
@@ -35,8 +39,10 @@ export default function FilterBar({
                         <button
                             key={opt.val}
                             onClick={() => setSelectedType(isSelected ? "all" : (opt.val as CertType))}
+                            aria-pressed={isSelected}
+                            aria-label={`Filter by ${opt.label}${isSelected ? " (active)" : ""}`}
                             className={cn(
-                                "px-3 py-1 text-sm font-bold transition-all border border-blue-600 focus:z-10",
+                                "px-3 py-1 text-sm font-bold transition-all border border-blue-600 focus:z-10 focus:ring-2 focus:ring-blue-400 focus:ring-offset-1",
                                 isFirst && "rounded-l-md",
                                 isLast && "rounded-r-md",
                                 !isFirst && "border-l-0",
@@ -54,7 +60,10 @@ export default function FilterBar({
             <div className="w-full md:w-auto flex flex-col md:flex-row gap-4 items-center">
 
                 <Select value={selectedSkill} onValueChange={(v) => setSelectedSkill(v as SkillLevel | "all")}>
-                    <SelectTrigger className="w-[200px] h-10 px-4 bg-white dark:bg-[#0B1324] border border-gray-300 dark:border-[#1E293B] text-gray-900 dark:text-[#CFD7E2] hover:border-blue-500 dark:hover:border-slate-500 rounded-sm font-medium transition-colors">
+                    <SelectTrigger
+                        className="w-[200px] h-10 px-4 bg-white dark:bg-[#0B1324] border border-gray-300 dark:border-[#1E293B] text-gray-900 dark:text-[#CFD7E2] hover:border-blue-500 dark:hover:border-slate-500 rounded-sm font-medium transition-colors"
+                        aria-label="Filter by skill level"
+                    >
                         <SelectValue placeholder="Select Skill Level" />
                     </SelectTrigger>
                     <SelectContent position="popper" sideOffset={5} align="start" className="bg-white dark:bg-[#0B1324] border-gray-300 dark:border-[#1E293B] text-gray-900 dark:text-[#CFD7E2]">
@@ -71,7 +80,8 @@ export default function FilterBar({
                     placeholder="Search certifications..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-[200px] h-10 px-3 py-2 bg-white dark:bg-[#0B1324] border border-gray-300 dark:border-[#1E293B] rounded-sm text-sm text-gray-900 dark:text-[#CFD7E2] placeholder:text-gray-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                    aria-label="Search certifications by name or abbreviation"
+                    className="w-[200px] h-10 px-3 py-2 bg-white dark:bg-[#0B1324] border border-gray-300 dark:border-[#1E293B] rounded-sm text-sm text-gray-900 dark:text-[#CFD7E2] placeholder:text-gray-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-400 transition-colors"
                 />
             </div>
         </div>

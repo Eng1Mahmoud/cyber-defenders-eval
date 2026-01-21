@@ -60,7 +60,11 @@ export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotPr
     const infoSecCerts = useMemo(() => filteredData.filter(c => c.cert_type === "infoSec"), [filteredData]);
 
     return (
-        <div className="flex flex-col gap-1">
+        <div
+            className="flex flex-col gap-1"
+            role="region"
+            aria-label="Certification scatter plot chart"
+        >
             {/* FilterBar is now inside CertScatterPlot */}
             <div className="pl-4 md:pl-[50px] lg:pl-[110px]">
                 <FilterBar
@@ -76,7 +80,21 @@ export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotPr
                 <ThemeToggle />
                 <FullScreenToggle />
             </div>
-            <div className="w-full h-[500px] sm:h-[500px] md:h-[550px] lg:h-[600px] relative">
+
+            {/* Aria-live region for screen reader announcements */}
+            <div
+                aria-live="polite"
+                aria-atomic="true"
+                className="sr-only"
+            >
+                {`Showing ${filteredData.length} certifications: ${blueCerts.length} Blue Team, ${redCerts.length} Red Team, ${infoSecCerts.length} InfoSec`}
+            </div>
+
+            <div
+                className="w-full h-[500px] sm:h-[500px] md:h-[550px] lg:h-[600px] relative"
+                role="img"
+                aria-label={`Scatter plot showing ${filteredData.length} certifications plotted by Market Presence (x-axis) and Satisfaction (y-axis)`}
+            >
                 <ResponsiveContainer width="100%" height="100%" >
                     <ScatterChart
                         margin={{ top: 20, right: 10, bottom: 10, left: 0 }}
