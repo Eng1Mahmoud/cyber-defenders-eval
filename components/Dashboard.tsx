@@ -35,7 +35,7 @@ export default function Dashboard() {
         <div className="container mx-auto px-2 py-4 sm:p-4 md:p-8 max-w-[1600px]">
             {/* Controls Section */}
             <div className="flex flex-col gap-4 mb-4">
-                <div className="flex flex-col lg:flex-row gap-4 justify-between items-start lg:items-center">
+                <div className="flex flex-col lg:flex-row gap-4 justify-between items-start lg:items-center md:ml-12 ">
                     <FilterBar
                         selectedType={selectedType}
                         setSelectedType={setSelectedType}
