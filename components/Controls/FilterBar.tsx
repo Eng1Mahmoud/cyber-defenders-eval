@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import {
     Select,
     SelectContent,
@@ -18,6 +19,24 @@ export default function FilterBar({
     searchQuery,
     setSearchQuery,
 }: FilterBarProps) {
+    const tabs = [
+        { val: "blue", label: "Blue Team" },
+        { val: "red", label: "Red Team" },
+        { val: "infoSec", label: "InfoSec" },
+    ];
+
+    const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+    const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
+        if (e.key === "ArrowRight") {
+            const nextIndex = (index + 1) % tabs.length;
+            buttonRefs.current[nextIndex]?.focus();
+        } else if (e.key === "ArrowLeft") {
+            const prevIndex = (index - 1 + tabs.length) % tabs.length;
+            buttonRefs.current[prevIndex]?.focus();
+        }
+    };
+
     return (
         <div
             className="flex flex-col md:flex-row gap-6 mb-6 items-center justify-center md:justify-start"
@@ -25,24 +44,28 @@ export default function FilterBar({
             aria-label="Filter certifications"
         >
 
-            <div className="flex bg-transparent" role="group" aria-label="Filter by team type">
-                {[
-                    { val: "blue", label: "Blue Team" },
-                    { val: "red", label: "Red Team" },
-                    { val: "infoSec", label: "InfoSec" },
-                ].map((opt, index, arr) => {
+            <div className="flex bg-transparent" role="tablist" aria-label="Filter by team type">
+                {tabs.map((opt, index, arr) => {
                     const isFirst = index === 0;
                     const isLast = index === arr.length - 1;
                     const isSelected = selectedType === opt.val;
 
+                    // Standard roving tabindex: only one element in the group is focusable via Tab
+                    // If none is selected, the first one is focusable.
+                    const isFocusable = isSelected || (selectedType === "all" && isFirst);
+
                     return (
                         <button
                             key={opt.val}
+                            ref={(el) => { buttonRefs.current[index] = el; }}
                             onClick={() => setSelectedType(isSelected ? "all" : (opt.val as CertType))}
-                            aria-pressed={isSelected}
+                            onKeyDown={(e) => handleKeyDown(e, index)}
+                            role="tab"
+                            aria-selected={isSelected}
+                            tabIndex={isFocusable ? 0 : -1}
                             aria-label={`Filter by ${opt.label}${isSelected ? " (active)" : ""}`}
                             className={cn(
-                                "px-3 py-1 text-sm font-bold transition-all border border-blue-600 focus:z-10 focus:ring-2 focus:ring-blue-400 focus:ring-offset-1",
+                                "px-3 py-1 text-sm font-bold transition-all border border-blue-600 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-1",
                                 isFirst && "rounded-l-md",
                                 isLast && "rounded-r-md",
                                 !isFirst && "border-l-0",

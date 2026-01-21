@@ -8,10 +8,31 @@ export const ChartNode = (props: ChartNodeProps) => {
 
     if (!payload || cx === undefined || cy === undefined) return null;
 
-    const handleKeyDown = (e: React.KeyboardEvent) => {
+    const handleKeyDown = (e: React.KeyboardEvent<SVGGElement>) => {
         if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
             onClick && onClick(props);
+        }
+        
+        // Arrow key navigation between nodes
+        if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
+            e.preventDefault();
+            const currentElement = e.currentTarget;
+            const parent = currentElement.parentElement;
+            if (!parent) return;
+            
+            // Get all focusable nodes in the chart
+            const allNodes = Array.from(parent.querySelectorAll('g[tabindex="0"]')) as SVGGElement[];
+            const currentIndex = allNodes.indexOf(currentElement);
+            
+            let nextIndex = currentIndex;
+            if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+                nextIndex = (currentIndex + 1) % allNodes.length;
+            } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+                nextIndex = (currentIndex - 1 + allNodes.length) % allNodes.length;
+            }
+            
+            allNodes[nextIndex]?.focus();
         }
     };
 
@@ -24,26 +45,42 @@ export const ChartNode = (props: ChartNodeProps) => {
             tabIndex={0}
             role="button"
             aria-label={ariaLabel}
-            className="text-slate-400 dark:text-slate-400 focus:outline-none focus-visible:outline-none"
+            className="focus:outline-none cursor-pointer"
+            style={{ outline: "none" }}
         >
             {/* Larger invisible hit area for mobile */}
-            {isMobile && <circle cx={cx} cy={cy} r={20} fill="transparent" className="cursor-pointer" />}
+            {isMobile && <circle cx={cx} cy={cy} r={20} fill="transparent" />}
 
-            {/* Focus ring - visible when focused via keyboard */}
+            {/* Main node circle */}
+            <circle 
+                cx={cx} 
+                cy={cy} 
+                r={isMobile ? 8 : 6} 
+                fill={fill} 
+                className="stroke-gray-100 dark:stroke-slate-50 hover:opacity-80 transition-opacity" 
+                strokeWidth={1} 
+            />
+            
+            {/* Focus ring - shown when focused via keyboard */}
             <circle
                 cx={cx}
                 cy={cy}
                 r={isMobile ? 12 : 10}
-                fill="transparent"
-                className="stroke-transparent group-focus-visible:stroke-blue-500 transition-all"
+                fill="none"
+                className="stroke-transparent transition-all"
                 strokeWidth={2}
-                style={{ stroke: "transparent" }}
+                style={{ stroke: "var(--focus-ring-color, transparent)" }}
             />
-
-            <circle cx={cx} cy={cy} r={isMobile ? 8 : 6} fill={fill} className="stroke-gray-100 dark:stroke-slate-50 cursor-pointer hover:opacity-80 transition-opacity" strokeWidth={1} />
+            
             <text x={cx} y={cy + 15} textAnchor="middle" className="fill-gray-500 dark:fill-slate-400 pointer-events-none select-none font-medium" fontSize={isMobile ? 11 : 10}>
                 {payload.abbreviation}
             </text>
+            
+            <style>{`
+                g:focus circle:nth-of-type(${isMobile ? 3 : 2}) {
+                    stroke: #3b82f6 !important;
+                }
+            `}</style>
         </g>
     );
 };
