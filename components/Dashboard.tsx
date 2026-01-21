@@ -32,10 +32,10 @@ export default function Dashboard() {
 
 
     return (
-        <div className="container mx-auto px-2 py-4 sm:p-4 md:p-8 max-w-[1600px]">
+        <div className="container mx-auto px-2 py-4 sm:p-4 md:p-8 ">
             {/* Controls Section */}
             <div className="flex flex-col gap-4 mb-4">
-                <div className="flex flex-col lg:flex-row gap-4 justify-between items-start lg:items-center md:ml-12 ">
+                <div className="flex flex-col  gap-1 justify-between items-start lg:items-center md:ml-12 ">
                     <FilterBar
                         selectedType={selectedType}
                         setSelectedType={setSelectedType}
@@ -44,7 +44,7 @@ export default function Dashboard() {
                         searchQuery={searchQuery}
                         setSearchQuery={setSearchQuery}
                     />
-                    <div className="flex gap-2 self-end lg:self-auto">
+                    <div className="flex gap-2 self-end ">
                         <ThemeToggle />
                         <FullScreenToggle />
                     </div>

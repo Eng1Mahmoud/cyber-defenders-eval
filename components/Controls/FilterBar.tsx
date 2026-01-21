@@ -39,7 +39,7 @@ export default function FilterBar({
 
     return (
         <div
-            className="flex flex-col md:flex-row gap-6 mb-6 items-center justify-center md:justify-start"
+            className="flex flex-col md:flex-row gap-6 mb-6 items-center justify-center md:justify-start w-full"
             role="search"
             aria-label="Filter certifications"
         >
