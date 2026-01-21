@@ -1,5 +1,5 @@
 "use client";
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import {
     ResponsiveContainer,
     ScatterChart,
@@ -10,18 +10,15 @@ import {
     ReferenceArea,
     Label,
 } from "recharts";
-import { CertType, SkillLevel, CertScatterPlotProps } from "@/types";
+import { CertScatterPlotProps } from "@/types";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useTheme } from "@/hooks/use-theme";
 import { Info } from "lucide-react";
 import { QuadrantLabel } from "./QuadrantLabel";
 import { ChartTooltip } from "./ChartTooltip";
 import { ChartNode } from "./ChartNode";
-import FilterBar from "../Controls/FilterBar";
-import ThemeToggle from "../Controls/ThemeToggle";
-import FullScreenToggle from "../Controls/FullScreenToggle";
 
-const COLOR_MAP: Record<CertType, string> = {
+const COLOR_MAP: Record<"blue" | "red" | "infoSec", string> = {
     blue: "#3b82f6",
     red: "#ef4444",
     infoSec: "#94a3b8",
@@ -32,32 +29,14 @@ export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotPr
     const isMobile = useIsMobile();
     const { isDark } = useTheme();
 
-    // Filter state (now managed internally)
-    const [selectedType, setSelectedType] = useState<CertType | "all">("blue");
-    const [selectedSkill, setSelectedSkill] = useState<SkillLevel | "all">("all");
-    const [searchQuery, setSearchQuery] = useState("");
-
     // Theme-aware colors
     const axisColor = isDark ? "#ffffff" : "#1e293b";
     const referenceAreaFill = isDark ? "#1e293b" : "#e2e8f0";
     const cursorColor = isDark ? "#94a3b8" : "#64748b";
 
-    // Filter the data
-    const filteredData = useMemo(() => {
-        return data.filter((cert) => {
-            const matchType = selectedType === "all" || cert.cert_type === selectedType;
-            const matchSkill = selectedSkill === "all" || cert.skill_level === selectedSkill;
-            const matchSearch = searchQuery === "" ||
-                cert.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                cert.abbreviation.toLowerCase().includes(searchQuery.toLowerCase());
-
-            return matchType && matchSkill && matchSearch;
-        });
-    }, [data, selectedType, selectedSkill, searchQuery]);
-
-    const blueCerts = useMemo(() => filteredData.filter(c => c.cert_type === "blue"), [filteredData]);
-    const redCerts = useMemo(() => filteredData.filter(c => c.cert_type === "red"), [filteredData]);
-    const infoSecCerts = useMemo(() => filteredData.filter(c => c.cert_type === "infoSec"), [filteredData]);
+    const blueCerts = useMemo(() => data.filter(c => c.cert_type === "blue"), [data]);
+    const redCerts = useMemo(() => data.filter(c => c.cert_type === "red"), [data]);
+    const infoSecCerts = useMemo(() => data.filter(c => c.cert_type === "infoSec"), [data]);
 
     return (
         <div
@@ -65,35 +44,19 @@ export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotPr
             role="region"
             aria-label="Certification scatter plot chart"
         >
-            {/* FilterBar is now inside CertScatterPlot */}
-            <div className="pl-4 md:pl-[50px] lg:pl-[110px]">
-                <FilterBar
-                    selectedType={selectedType}
-                    setSelectedType={setSelectedType}
-                    selectedSkill={selectedSkill}
-                    setSelectedSkill={setSelectedSkill}
-                    searchQuery={searchQuery}
-                    setSearchQuery={setSearchQuery}
-                />
-            </div>
-            <div className=" flex gap-1 justify-end">
-                <ThemeToggle />
-                <FullScreenToggle />
-            </div>
-
             {/* Aria-live region for screen reader announcements */}
             <div
                 aria-live="polite"
                 aria-atomic="true"
                 className="sr-only"
             >
-                {`Showing ${filteredData.length} certifications: ${blueCerts.length} Blue Team, ${redCerts.length} Red Team, ${infoSecCerts.length} InfoSec`}
+                {`Showing ${data.length} certifications: ${blueCerts.length} Blue Team, ${redCerts.length} Red Team, ${infoSecCerts.length} InfoSec`}
             </div>
 
             <div
                 className="w-full h-[500px] sm:h-[500px] md:h-[550px] lg:h-[600px] relative"
                 role="img"
-                aria-label={`Scatter plot showing ${filteredData.length} certifications plotted by Market Presence (x-axis) and Satisfaction (y-axis)`}
+                aria-label={`Scatter plot showing ${data.length} certifications plotted by Market Presence (x-axis) and Satisfaction (y-axis)`}
             >
                 <ResponsiveContainer width="100%" height="100%" >
                     <ScatterChart
@@ -157,7 +120,7 @@ export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotPr
                             shape={<ChartNode />}
                         />
                         {/* Dummy scatter to keep chart/reference areas rendered when data is empty */}
-                        {filteredData.length === 0 && (
+                        {data.length === 0 && (
                             <Scatter
                                 data={[{ market_presence: 0.5, satisfaction: 2.5 }]}
                                 fill="none"
