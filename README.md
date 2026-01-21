@@ -29,7 +29,7 @@ This project is an interactive chart component that visualizes cybersecurity cer
 *   **framework: Next.js (App Router)**: Chosen for its robust features like Server Components, automatic routing, and ease of deployment. It provides a solid foundation for scaling if this component becomes part of a larger platform.
 *   **UI Library: shadcn/ui**: Selected for its accessibility, dark mode support, and ease of customization. It allows for a premium, consistent look (using Tailwind CSS) without the bloat of heavy component libraries.
 *   **Visualization: Recharts**:
-    *   *Rationale*: Recharts is React-native (component-based), making it easy to integrate into the React component tree. It supports responsive containers out of the box.
+    *   *Rationale*: Recharts is built specifically for React (component-based), making it easy to integrate into the React component tree. It supports responsive containers out of the box.
     *   *Trade-off*: While easier to use than D3.js, it offers slightly less low-level control over complex animations.
 *   **State Management**: React's native `useState` and `useMemo` were sufficient.
     *   *Rationale*: The state (filters, search queries) is local to the dashboard. Introducing Redux or Context would be over-engineering for this scope.
