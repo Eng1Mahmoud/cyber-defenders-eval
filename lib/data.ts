@@ -37,7 +37,7 @@ function generateMockCert(id: number): Certification {
         abbreviation: abbr,
         description: "A comprehensive certification for cybersecurity professionals focusing on practical skills and theoretical knowledge.",
         image: "/placeholder.svg",
-        url: "https://example.com",
+        url: "https://cyberdefenders.org/",
         cost: `$${getRandomInt(300, 1500)}`,
         training_included: Math.random() > 0.5,
         number_of_attempts: getRandomInt(1, 3),
@@ -69,4 +69,4 @@ function generateMockCert(id: number): Certification {
     };
 }
 
-export const MOCK_DATA: Certification[] = Array.from({ length: 60 }, (_, i) => generateMockCert(i));
+export const MOCK_DATA: Certification[] = Array.from({ length: 30 }, (_, i) => generateMockCert(i));
