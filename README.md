@@ -1,18 +1,7 @@
 # CyberDefenders Frontend Developer Evaluation
 
 ## Overview
-This project is an interactive chart component that visualizes cybersecurity certifications based on community ratings. It is built using **Next.js**, **shadcn/ui**, and **Recharts**.
-
-## Live Demo
-(Link to deployed version if applicable)
-
-## Tech Stack
-- **Framework**: [Next.js](https://nextjs.org/) (App Router)
-- **UI Component Library**: [shadcn/ui](https://ui.shadcn.com/) (Radix UI + Tailwind CSS)
-- **Visualization**: [Recharts](https://recharts.org/)
-- **Styling**: Tailwind CSS
-- **Icons**: Lucide React
-- **Language**: TypeScript
+This project is an interactive chart component that visualizes cybersecurity certifications based on community ratings. It is built using **Next.js**, **shadcn/ui**, and **Recharts**. Ideally suited for cybersecurity professionals looking to navigate their career path.
 
 ## Getting Started
 
@@ -35,38 +24,40 @@ This project is an interactive chart component that visualizes cybersecurity cer
 4. **Open your browser:**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
-## Features implemented
-- **Interactive Scatter Plot**:
-  - X-axis: Market Presence
-  - Y-axis: Satisfaction
-  - Color-coded bubbles by Certification Type (Blue Team, Red Team, InfoSec).
-  - Custom Tooltips on hover.
-- **Filtering & Search**:
-  - Filter by Certification Type.
-  - Filter by Skill Level.
-  - Search by Name or Abbreviation.
-- **Detailed View**:
-  - Click on any bubble to open a Dialog with full certification details.
-- **Responsive Design**:
-  - Fully responsive layout for mobile and desktop.
-  - Collapsible filter stack on mobile.
-- **Full Screen Mode**:
-  - One-click toggle to view the roadmap in full screen.
+## Architecture Decisions & Rationale
 
-## Decisions & Trade-offs
-- **Chart Library**: I chose **Recharts** because it is built specifically for React, offering good composition and performance for this dataset size (~50-100 items). D3.js would offer more control but at a significant complexity cost.
-- **State Management**: Used React local state (`useState`, `useMemo`) as the application complexity is low and doesn't require global state management like Redux or Zustand.
-- **Mock Data**: Data is generated on the client side using a factory pattern to ensure a realistic distribution of values for visualization purposes.
+*   **framework: Next.js (App Router)**: Chosen for its robust features like Server Components, automatic routing, and ease of deployment. It provides a solid foundation for scaling if this component becomes part of a larger platform.
+*   **UI Library: shadcn/ui**: Selected for its accessibility, dark mode support, and ease of customization. It allows for a premium, consistent look (using Tailwind CSS) without the bloat of heavy component libraries.
+*   **Visualization: Recharts**:
+    *   *Rationale*: Recharts is React-native (component-based), making it easy to integrate into the React component tree. It supports responsive containers out of the box.
+    *   *Trade-off*: While easier to use than D3.js, it offers slightly less low-level control over complex animations.
+*   **State Management**: React's native `useState` and `useMemo` were sufficient.
+    *   *Rationale*: The state (filters, search queries) is local to the dashboard. Introducing Redux or Context would be over-engineering for this scope.
 
-## Folder Structure
-- `app/`: Next.js App Router pages and layout.
-- `components/Chart`: Specialized chart components.
-- `components/Controls`: Filter and search controls.
-- `components/ui`: Reusable UI components from shadcn/ui.
-- `lib/`: Utility functions and type definitions.
+## Assumptions Made
 
-## Future Improvements
-- **Animation**: Add Framer Motion for smoother transitions when filtering points.
-- **Backend Integration**: Replace mock data with real API calls.
-- **Unit Testing**: Add Vitest/Jest tests for the filtering logic and components.
+*   **Data Scale**: Assumed a dataset size of ~50-100 certifications. The current client-side filtering and rendering performance is optimized for this range.
+*   **Mobile Usage**: Assumed that mobile users prefer tapping over hovering. Implemented larger touch targets (20px invisible hit area) for easier interaction on small screens.
+*   **Browser Support**: Targeted modern browsers (Chrome, Edge, Firefox, Safari) with support for Flexbox and modern CSS features.
 
+## Known Limitations & Trade-offs
+
+*   **Mock Data**: The application currently runs on client-side generated mock data (`lib/data.ts`). In a production environment, this would be replaced by a server-side API fetch.
+*   **Initial Load**: The chart library is loaded on the client side. There is a brief moment before hydration where the chart appears (handled by Next.js loading states, but noticeable).
+*   **Animation**: Complex transition animations (e.g., bubbles moving to new positions when filtering) were skipped in favor of instant updates for performance and implementation speed, though this could be added with libraries like Framer Motion.
+
+## Features Implemented
+
+*   **Interactive Scatter Plot**: Market Presence vs. Satisfaction.
+*   **Advanced Filtering**: Conjunctive filtering by Type, Skill Level, and Search text.
+*   **Responsive Design**: Mobile-adaptive layout, including conditional axis labeling and optimizing specific mobile interactions.
+*   **Theme**: CyberDefenders-inspired dark theme (#0F172A).
+*   **Accessibility**: ARIA labels for screen readers and keyboard-navigable inputs.
+
+## Project Structure
+
+*   `components/Chart/`: Specialized sub-components (`CertScatterPlot`, `QuadrantLabel`, `ChartNode`).
+*   `components/Controls/`: Control elements (`FilterBar`, `FullScreenToggle`).
+*   `components/CertDetailsDialog.tsx`: Modal for displaying certification details.
+*   `types/`: Centralized TypeScript interfaces.
+*   `lib/`: Data generation and helpers.
