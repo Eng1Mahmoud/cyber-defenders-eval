@@ -7,12 +7,15 @@ import { useState, useEffect } from "react";
  * Returns true if dark mode is active
  */
 export function useTheme() {
-    const [isDark, setIsDark] = useState(true);
+    const [isDark, setIsDark] = useState(() => {
+        // Initialize from DOM if available (client-side)
+        if (typeof document !== "undefined") {
+            return document.documentElement.classList.contains("dark");
+        }
+        return true; // Default to dark
+    });
 
     useEffect(() => {
-        // Initial check
-        setIsDark(document.documentElement.classList.contains("dark"));
-
         // Create observer to watch for class changes on html element
         const observer = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {

@@ -3,7 +3,6 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 export const ChartNode = (props: ChartNodeProps) => {
     const { cx, cy, fill, payload, onClick } = props;
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const isMobile = useIsMobile();
 
     if (!payload || cx === undefined || cy === undefined) return null;
@@ -11,7 +10,7 @@ export const ChartNode = (props: ChartNodeProps) => {
     const handleKeyDown = (e: React.KeyboardEvent<SVGGElement>) => {
         if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
-            onClick && onClick(props);
+            if (onClick) onClick(props);
         }
         
         // Arrow key navigation between nodes
