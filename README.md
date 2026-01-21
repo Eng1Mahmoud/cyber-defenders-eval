@@ -7,7 +7,7 @@ This project is an interactive chart component that visualizes cybersecurity cer
 
 1. **Clone the repository:**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Eng1Mahmoud/cyber-defenders-eval.git
    cd cyber-defenders-eval
    ```
 
