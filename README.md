@@ -48,11 +48,15 @@ This project is an interactive chart component that visualizes cybersecurity cer
 
 ## Features Implemented
 
-*   **Interactive Scatter Plot**: Market Presence vs. Satisfaction.
+*   **Interactive Scatter Plot**: Market Presence vs. Satisfaction visualization.
+*   **Color Coding**: Distinct colors for Blue Team (blue), Red Team (red), and InfoSec (gray/white) certifications.
+*   **Rich Interactions**: 
+    *   **Tooltip**: Displays Name, Abbreviation, Metrics, and **Total Votes** on hover.
+    *   **Detailed Modal**: Full certification data including Cost, Attempts, Training status, Domains, and Job Roles.
 *   **Advanced Filtering**: Conjunctive filtering by Type, Skill Level, and Search text.
-*   **Responsive Design**: Mobile-adaptive layout, including conditional axis labeling and optimizing specific mobile interactions.
+*   **Responsive Design**: Mobile-adaptive layout with optimized touch targets.
 *   **Theme**: CyberDefenders-inspired dark theme (#0F172A).
-*   **Accessibility**: ARIA labels for screen readers and keyboard-navigable inputs.
+*   **Accessibility**: ARIA labels, keyboard navigation, and focus management.
 
 ## Project Structure
 
