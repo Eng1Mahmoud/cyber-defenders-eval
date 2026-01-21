@@ -17,7 +17,7 @@ export default function FilterBar({
     setSelectedSkill,
 }: FilterBarProps) {
     return (
-        <div className="flex flex-col md:flex-row gap-6 mb-6 items-start md:items-center justify-start">
+        <div className="flex flex-col md:flex-row gap-6 mb-6 items-center justify-center md:justify-start">
 
             <div className="flex bg-transparent">
                 {[
@@ -49,12 +49,12 @@ export default function FilterBar({
                 })}
             </div>
 
-            <div className="w-full md:w-auto ">
+            <div className="w-full md:w-auto flex justify-center md:justify-start">
                 <Select value={selectedSkill} onValueChange={(v) => setSelectedSkill(v as SkillLevel | "all")}>
-                    <SelectTrigger className="w-full md:w-[200px] bg-transparent border-slate-700 text-slate-300 hover:border-slate-500 h-10 rounded-sm font-medium px-4">
+                    <SelectTrigger className="w-[200px] bg-[#0B1324] border-[#1E293B] text-[#CFD7E2] hover:border-slate-500 h-10 rounded-sm font-medium px-4">
                         <SelectValue placeholder="Select Skill Level" />
                     </SelectTrigger>
-                    <SelectContent position="popper" sideOffset={5} align="start" className="bg-[#0f172a] border-slate-700 text-slate-300 ">
+                    <SelectContent position="popper" sideOffset={5} align="start" className="bg-[#0B1324] border-[#1E293B] text-[#CFD7E2] ">
                         <SelectItem value="all"> Select Skill Level</SelectItem>
                         <SelectItem value="Novice">Novice</SelectItem>
                         <SelectItem value="Beginner">Beginner</SelectItem>

@@ -32,12 +32,12 @@ export default function Dashboard() {
     }, [selectedType, selectedSkill]);
 
     return (
-        <div className="container mx-auto p-4 md:p-8 max-w-[1600px]">
+        <div className="container mx-auto px-2 py-4 sm:p-4 md:p-8 max-w-[1600px]">
             <div className="mb-6 flex flex-col md:flex-row justify-between items-end gap-4">
             </div>
 
             <div className="flex flex-col gap-6">
-                <div className="pl-[110px]">
+                <div className="pl-4 md:pl-[50px] lg:pl-[110px]">
                     <FilterBar
                         selectedType={selectedType}
                         setSelectedType={setSelectedType}
@@ -51,7 +51,7 @@ export default function Dashboard() {
                         data={filteredData}
                         onNodeClick={setSelectedCert}
                     />
-                    <div className="absolute top-4 right-4 z-10">
+                    <div className="absolute -top-4 right-4 z-10">
                         <Button
                             variant="ghost"
                             size="icon"
