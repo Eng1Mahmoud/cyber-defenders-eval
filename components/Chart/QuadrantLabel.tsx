@@ -31,8 +31,10 @@ export const QuadrantLabel = (props: QuadrantLabelProps) => {
     // Center text Y position in the rectangle
     const textY = rectY + rectHeight / 2;
 
-    // Consistent background for both light and dark modes
-    const rectFillClass = "fill-gray-200 dark:fill-slate-800 opacity-90";
+    // In light mode, if parent ReferenceArea has a background, make label background transparent
+    const rectFillClass = hasBackground && !isDark
+        ? "fill-transparent"
+        : "fill-gray-200 dark:fill-slate-800 opacity-90";
 
     return (
         <g>
