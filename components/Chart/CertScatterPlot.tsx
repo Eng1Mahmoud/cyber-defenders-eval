@@ -31,7 +31,7 @@ export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotPr
 
     // Theme-aware colors
     const axisColor = isDark ? "#ffffff" : "#1e293b";
-    const referenceAreaFill = isDark ? "#1e293b" : "#e2e8f0";
+    const referenceAreaFill = isDark ? "#0f1829" : "#f4f6f8";
     const cursorColor = isDark ? "#94a3b8" : "#64748b";
 
     const blueCerts = useMemo(() => data.filter(c => c.cert_type === "blue"), [data]);
