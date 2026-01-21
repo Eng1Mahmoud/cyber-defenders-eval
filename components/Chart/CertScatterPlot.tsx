@@ -29,9 +29,9 @@ export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotPr
     const isMobile = useIsMobile();
     const { isDark } = useTheme();
 
-    // Theme-aware colors
-    const axisColor = isDark ? "#ffffff" : "#1e293b";
-    const referenceAreaFill = isDark ? "#0f1829" : "#f4f6f8";
+    // Theme-aware colors using CSS variables for stability
+    const axisColor = "var(--chart-axis-line)";
+    const referenceAreaFill = "var(--chart-reference-fill)";
     const cursorColor = isDark ? "#94a3b8" : "#64748b";
 
     const blueCerts = useMemo(() => data.filter(c => c.cert_type === "blue"), [data]);
@@ -104,6 +104,7 @@ export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotPr
                             fill={COLOR_MAP.blue}
                             onClick={(props) => onNodeClick(props.payload)}
                             shape={<ChartNode />}
+                            isAnimationActive={false}
                         />
                         <Scatter
                             name="Red Team"
@@ -111,6 +112,7 @@ export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotPr
                             fill={COLOR_MAP.red}
                             onClick={(props) => onNodeClick(props.payload)}
                             shape={<ChartNode />}
+                            isAnimationActive={false}
                         />
                         <Scatter
                             name="InfoSec"
@@ -118,6 +120,7 @@ export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotPr
                             fill={COLOR_MAP.infoSec}
                             onClick={(props) => onNodeClick(props.payload)}
                             shape={<ChartNode />}
+                            isAnimationActive={false}
                         />
                         {/* Dummy scatter to keep chart/reference areas rendered when data is empty */}
                         {data.length === 0 && (
@@ -128,6 +131,7 @@ export default function CertScatterPlot({ data, onNodeClick }: CertScatterPlotPr
                                 legendType="none"
                                 tooltipType="none"
                                 pointerEvents="none"
+                                isAnimationActive={false}
                             />
                         )}
                     </ScatterChart>

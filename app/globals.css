@@ -79,6 +79,8 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --chart-axis-line: #1e293b;
+  --chart-reference-fill: #f4f6f8;
 }
 
 .dark {
@@ -113,6 +115,8 @@
   --sidebar-accent-foreground: #f8fafc;
   --sidebar-border: #1e293b;
   --sidebar-ring: #2563eb;
+  --chart-axis-line: #ffffff;
+  --chart-reference-fill: #0f1829;
 }
 
 @layer base {
