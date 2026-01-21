@@ -44,7 +44,7 @@ export default function FilterBar({
             aria-label="Filter certifications"
         >
 
-            <div className="flex bg-transparent" role="tablist" aria-label="Filter by team type">
+            <div className="flex justify-center bg-transparent" role="tablist" aria-label="Filter by team type">
                 {tabs.map((opt, index, arr) => {
                     const isFirst = index === 0;
                     const isLast = index === arr.length - 1;
@@ -84,7 +84,7 @@ export default function FilterBar({
 
                 <Select value={selectedSkill} onValueChange={(v) => setSelectedSkill(v as SkillLevel | "all")}>
                     <SelectTrigger
-                        className="w-[200px] h-10 px-4 bg-white dark:bg-[#0B1324] border border-gray-300 dark:border-[#1E293B] text-gray-900 dark:text-[#CFD7E2] hover:border-blue-500 dark:hover:border-slate-500 rounded-sm font-medium transition-colors"
+                        className="w-[250px] h-10 px-4 bg-white dark:bg-[#0B1324] border border-gray-300 dark:border-[#1E293B] text-gray-900 dark:text-[#CFD7E2] hover:border-blue-500 dark:hover:border-slate-500 rounded-sm font-medium transition-colors"
                         aria-label="Filter by skill level"
                     >
                         <SelectValue placeholder="Select Skill Level" />
@@ -104,7 +104,7 @@ export default function FilterBar({
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     aria-label="Search certifications by name or abbreviation"
-                    className="w-[200px] h-10 px-3 py-2 bg-white dark:bg-[#0B1324] border border-gray-300 dark:border-[#1E293B] rounded-sm text-sm text-gray-900 dark:text-[#CFD7E2] placeholder:text-gray-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-400 transition-colors"
+                    className="w-[250px] h-10 px-3 py-2 bg-white dark:bg-[#0B1324] border border-gray-300 dark:border-[#1E293B] rounded-sm text-sm text-gray-900 dark:text-[#CFD7E2] placeholder:text-gray-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-400 transition-colors"
                 />
             </div>
         </div>
