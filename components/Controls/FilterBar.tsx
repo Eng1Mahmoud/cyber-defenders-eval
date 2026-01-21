@@ -54,11 +54,11 @@ export default function FilterBar({
             <div className="w-full md:w-auto flex flex-col md:flex-row gap-4 items-center">
 
                 <Select value={selectedSkill} onValueChange={(v) => setSelectedSkill(v as SkillLevel | "all")}>
-                    <SelectTrigger className="w-[200px] bg-[#0B1324] border-[#1E293B] text-[#CFD7E2] hover:border-slate-500 h-10 rounded-sm font-medium px-4">
+                    <SelectTrigger className="w-[200px] h-10 px-4 bg-white dark:bg-[#0B1324] border border-gray-300 dark:border-[#1E293B] text-gray-900 dark:text-[#CFD7E2] hover:border-blue-500 dark:hover:border-slate-500 rounded-sm font-medium transition-colors">
                         <SelectValue placeholder="Select Skill Level" />
                     </SelectTrigger>
-                    <SelectContent position="popper" sideOffset={5} align="start" className="bg-[#0B1324] border-[#1E293B] text-[#CFD7E2] ">
-                        <SelectItem value="all"> Select Skill Level</SelectItem>
+                    <SelectContent position="popper" sideOffset={5} align="start" className="bg-white dark:bg-[#0B1324] border-gray-300 dark:border-[#1E293B] text-gray-900 dark:text-[#CFD7E2]">
+                        <SelectItem value="all">Select Skill Level</SelectItem>
                         <SelectItem value="Novice">Novice</SelectItem>
                         <SelectItem value="Beginner">Beginner</SelectItem>
                         <SelectItem value="Intermediate">Intermediate</SelectItem>
@@ -71,7 +71,7 @@ export default function FilterBar({
                     placeholder="Search certifications..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-[200px] h-10 px-3 py-2 bg-[#0B1324] border border-[#1E293B] rounded-sm text-sm text-[#CFD7E2] placeholder:text-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                    className="w-[200px] h-10 px-3 py-2 bg-white dark:bg-[#0B1324] border border-gray-300 dark:border-[#1E293B] rounded-sm text-sm text-gray-900 dark:text-[#CFD7E2] placeholder:text-gray-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
                 />
             </div>
         </div>

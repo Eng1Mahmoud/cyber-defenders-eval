@@ -1,30 +1,40 @@
 "use client";
 import { useIsMobile } from "@/hooks/use-mobile";
-
+import { useTheme } from "@/hooks/use-theme";
 import { QuadrantLabelProps } from "@/types";
 
 export const QuadrantLabel = (props: QuadrantLabelProps) => {
-    const { viewBox, text } = props;
+    const { viewBox, text, hasBackground = false } = props;
     // Recharts passes viewBox sometimes as null on initial render
     if (!viewBox) return null;
 
     const { x, y, width, height } = viewBox;
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const isMobile = useIsMobile();
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const { isDark } = useTheme();
 
     // Responsive configuration
     const rectWidth = isMobile ? 100 : 140;
     const rectHeight = isMobile ? 24 : 30;
     const fontSize = isMobile ? "9px" : "11px";
-    const yMargin = isMobile ? 5 : 10;
+    const yMargin = 3;
 
     const isBottom = text === "Visionaries" || text === "Niche Players";
     const yPos = isBottom ? y + height - yMargin : y + yMargin;
 
-    // Calculate Rect Y based on position and height
+    // Calculate Rect position - center vertically
     const rectY = isBottom
-        ? yPos - rectHeight + (isMobile ? 2 : 4)
-        : yPos - (isMobile ? 2 : 4);
+        ? yPos - rectHeight + 4
+        : yPos - 4;
+
+    // Center text Y position in the rectangle
+    const textY = rectY + rectHeight / 2;
+
+    // In light mode, if parent ReferenceArea has a background, make rect transparent
+    const rectFillClass = hasBackground && !isDark
+        ? "fill-transparent"
+        : "fill-gray-200 dark:fill-slate-800 opacity-90";
 
     return (
         <g>
@@ -34,16 +44,14 @@ export const QuadrantLabel = (props: QuadrantLabelProps) => {
                 width={rectWidth}
                 height={rectHeight}
                 rx={4}
-                fill="#1e293b"
-                className="opacity-90"
+                className={rectFillClass}
             />
             <text
                 x={x + width / 2}
-                y={yPos}
-                fill="#94a3b8"
+                y={textY}
                 textAnchor="middle"
-                dominantBaseline={isBottom ? "auto" : "hanging"}
-                className="font-bold uppercase tracking-widest pointer-events-none select-none"
+                dominantBaseline="middle"
+                className="fill-gray-600 dark:fill-slate-400 font-bold uppercase tracking-widest pointer-events-none select-none"
                 style={{ fontWeight: 600, fontSize: fontSize }}
             >
                 {text}

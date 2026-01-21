@@ -57,6 +57,7 @@ export interface CertScatterPlotProps {
 export interface QuadrantLabelProps {
     viewBox?: { x: number; y: number; width: number; height: number };
     text: string;
+    hasBackground?: boolean; // If true, parent ReferenceArea has a fill color
 }
 
 export interface ChartTooltipProps {

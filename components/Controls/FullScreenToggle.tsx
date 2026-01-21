@@ -7,7 +7,7 @@ export default function FullScreenToggle() {
         <Button
             variant="ghost"
             size="icon"
-            className="text-slate-500 hover:text-slate-300 hover:bg-slate-800/50"
+            className="text-gray-600 dark:text-slate-500 hover:text-gray-900 dark:hover:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800/50"
             onClick={() => {
                 if (!document.fullscreenElement) {
                     document.documentElement.requestFullscreen();
